@@ -309,7 +309,7 @@ showController:(NSDictionary*)layout animationType:(NSString*)animationType glob
     if ([animationType isEqualToString:@"custom"])
     {
         [controller setTransitioningDelegate:lastModalPresenterViewController];
-        [lastModalPresenterViewController.dismissInteractionController wireToViewController:self];
+        [[(RCCNavigationController *)lastModalPresenterViewController dismissInteractionController] wireToViewController:controller];
     }
 
     [lastModalPresenterViewController presentViewController:controller

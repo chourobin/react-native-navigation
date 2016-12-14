@@ -12,12 +12,6 @@
 
 @interface RCCNavigationController () <UIViewControllerTransitioningDelegate>
 
-@property (strong, nonatomic) RCCPresentAnimationController *presentAnimationController;
-
-@property (strong, nonatomic) RCCDismissAnimationController *dismissAnimationController;
-
-@property (strong, nonatomic) RCCDismissInteractionController *dismissInteractionController;
-
 @end
 
 @implementation RCCNavigationController
@@ -56,8 +50,6 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
   [self processTitleView:viewController
                    props:props
                    style:navigatorStyle];
-
-  [self processTransitioning:navigatorStyle];
 
   return self;
 }
@@ -307,32 +299,6 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
                                                           titleImageData:props[@"titleImage"]];
   
   [titleViewHelper setup:style];
-  
-}
-
-- (void)processTransitioning:(NSDictionary *)style
-{
-  NSNumber *customTransition = style[@"customTransition"];
-  BOOL customTransitionBool = customTransition ? [customTransition boolValue] : NO;
-  if (customTransitionBool)
-  {
-    [self setTransitioningDelegate:self];
-    [self.dismissInteractionController wireToViewController:self];
-  }
-  
-  NSNumber *customTransitionFade = style[@"customTransitionFade"];
-  if (customTransitionFade) {
-    BOOL fadeBool = [customTransitionFade boolValue];
-    [self.presentAnimationController setAnimateFade:fadeBool];
-    [self.dismissAnimationController setAnimateFade:fadeBool];
-  }
-  
-  NSNumber *customTransitionScaleDown = style[@"customTransitionScaleDown"];
-  if (customTransitionScaleDown) {
-    BOOL scaleDownBool = [customTransitionScaleDown boolValue];
-    [self.presentAnimationController setAnimateScale:scaleDownBool];
-    [self.dismissAnimationController setAnimateScale:scaleDownBool];
-  }
 }
 
 #pragma mark - <UIViewControllerTransitioningDelegate>

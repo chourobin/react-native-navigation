@@ -10,6 +10,10 @@
 #import "RCCTheSideBarManagerViewController.h"
 #import "RCCNotification.h"
 
+#import "RCCPresentAnimationController.h"
+#import "RCCDismissAnimationController.h"
+#import "RCCDismissInteractionController.h"
+
 #define kSlideDownAnimationDuration 0.35
 
 typedef NS_ENUM(NSInteger, RCCManagerModuleErrorCode)
@@ -300,10 +304,17 @@ showController:(NSDictionary*)layout animationType:(NSString*)animationType glob
                                                 error:[RCCManagerModule rccErrorWithCode:RCCManagerModuleCantCreateControllerErrorCode description:@"could not create controller"]];
         return;
     }
+    
+    UIViewController *lastModalPresenterViewController = [RCCManagerModule lastModalPresenterViewController];
+    if ([animationType isEqualToString:@"custom"])
+    {
+        [controller setTransitioningDelegate:lastModalPresenterViewController];
+        [lastModalPresenterViewController.dismissInteractionController wireToViewController:self];
+    }
 
-    [[RCCManagerModule lastModalPresenterViewController] presentViewController:controller
-                                                           animated:![animationType isEqualToString:@"none"]
-                                                         completion:^(){ resolve(nil); }];
+    [lastModalPresenterViewController presentViewController:controller
+                                                   animated:![animationType isEqualToString:@"none"]
+                                                 completion:^(){ resolve(nil); }];
 }
 
 -(BOOL)viewControllerIsModal:(UIViewController*)viewController

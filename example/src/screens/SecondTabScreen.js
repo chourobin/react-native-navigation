@@ -49,6 +49,10 @@ export default class SecondTabScreen extends Component {
           <Text style={styles.button}>Toggle Tabs</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity onPress={ this.onToggleRightSideMenuPress.bind(this) }>
+          <Text style={styles.button}>Toggle Right Side Menu</Text>
+        </TouchableOpacity>
+
       </View>
     );
   }
@@ -101,6 +105,11 @@ export default class SecondTabScreen extends Component {
       to: this.tabsHidden ? 'shown' : 'hidden'
     });
     this.tabsHidden = !this.tabsHidden;
+  }
+  onToggleRightSideMenuPress() {
+    this.props.navigator.toggleDrawer({
+      side: 'right'
+    });
   }
   onNavigatorEvent(event) {
     // handle a deep link

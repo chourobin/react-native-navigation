@@ -48,6 +48,9 @@ Navigation.startTabBasedApp({
   drawer: {
     left: {
       screen: 'example.SideMenu'
+    },
+    right: {
+      screen: 'example.SideMenu'
     }
   }
 });

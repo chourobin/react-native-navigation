@@ -331,7 +331,7 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
   if (customTransitionScaleDown) {
     BOOL scaleDownBool = [customTransitionScaleDown boolValue];
     [self.presentAnimationController setAnimateScale:scaleDownBool];
-    [self.dismissAnimationController setAnimateFade:scaleDownBool];
+    [self.dismissAnimationController setAnimateScale:scaleDownBool];
   }
 }
 

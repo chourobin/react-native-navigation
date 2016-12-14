@@ -46,7 +46,8 @@
 
 - (void)handleGesture:(UIPanGestureRecognizer *)gesture
 {
-    CGPoint translation = [gesture translationInView:[gesture.view superview]];
+    UIView *view = [gesture view];
+    CGPoint translation = [gesture translationInView:[view superview]];
     CGFloat progress = ((2.0/3.0) * translation.y / self.viewController.view.bounds.size.height);
     progress = fmin(fmax(progress, 0.0), 1.0);
     
@@ -68,6 +69,7 @@
             if (!self.shouldCompleteTransition) {
                 [self cancelInteractiveTransition];
             } else {
+                [view removeGestureRecognizer:gesture];
                 [self finishInteractiveTransition];
             }
         default:

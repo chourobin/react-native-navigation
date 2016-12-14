@@ -47,7 +47,7 @@
 - (void)handleGesture:(UIPanGestureRecognizer *)gesture
 {
     CGPoint translation = [gesture translationInView:[gesture.view superview]];
-    CGFloat progress = ((2/3) * translation.y / self.viewController.view.bounds.size.height);
+    CGFloat progress = ((2.0/3.0) * translation.y / self.viewController.view.bounds.size.height);
     progress = fmin(fmax(progress, 0.0), 1.0);
     
     switch ([gesture state]) {

@@ -5,6 +5,13 @@
 #import "RCTConvert.h"
 #import <objc/runtime.h>
 #import "RCCTitleViewHelper.h"
+#import "RCCPresentAnimationController.h"
+
+@interface RCCNavigationController () <UIViewControllerTransitioningDelegate>
+
+@property (strong, nonatomic) RCCPresentAnimationController *presentAnimationController;
+
+@end
 
 @implementation RCCNavigationController
 
@@ -42,7 +49,14 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
   [self processTitleView:viewController
                    props:props
                    style:navigatorStyle];
-  
+
+  NSNumber *interactiveDismiss = navigatorStyle[@"interactiveDismiss"];
+  BOOL interactiveDismissBool = interactiveDismiss ? [interactiveDismiss boolValue] : NO;
+  if (interactiveDismissBool)
+  {
+    [self setTransitioningDelegate:self];
+  }
+
   return self;
 }
 
@@ -67,6 +81,7 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
       NSMutableDictionary *mergedStyle = [NSMutableDictionary dictionaryWithDictionary:parent.navigatorStyle];
       
       // there are a few styles that we don't want to remember from our parent (they should be local)
+      [mergedStyle removeObjectForKey:@"interactiveDismiss"];
       [mergedStyle removeObjectForKey:@"navBarHidden"];
       [mergedStyle removeObjectForKey:@"statusBarHidden"];
       [mergedStyle removeObjectForKey:@"navBarHideOnScroll"];
@@ -294,5 +309,18 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
   
 }
 
+#pragma mark - <UIViewControllerTransitioningDelegate>
+
+- (RCCPresentAnimationController *)presentAnimationController {
+  if (!_presentAnimationController) {
+    _presentAnimationController = [[RCCPresentAnimationController alloc] init];
+  }
+  return _presentAnimationController;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+  return [self presentAnimationController];
+}
 
 @end

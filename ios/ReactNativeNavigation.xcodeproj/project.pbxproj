@@ -10,6 +10,8 @@
 		260804DB1CE0D9D20094DBA1 /* RCCToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 260804DA1CE0D9D20094DBA1 /* RCCToolBar.m */; };
 		26AFF3F51D7EEE2400CBA211 /* RCCTitleViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AFF3F41D7EEE2400CBA211 /* RCCTitleViewHelper.m */; };
 		A1176F761E01E286003A52CA /* RCCPresentAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1176F751E01E286003A52CA /* RCCPresentAnimationController.m */; };
+		A1176F871E01ECD9003A52CA /* RCCDismissAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1176F861E01ECD9003A52CA /* RCCDismissAnimationController.m */; };
+		A1176F8A1E01EEDF003A52CA /* RCCDismissInteractionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1176F891E01EEDF003A52CA /* RCCDismissInteractionController.m */; };
 		CC84A19E1C1A0C4E00B3A6A2 /* RCCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC84A1941C1A0C4E00B3A6A2 /* RCCManager.m */; };
 		CC84A19F1C1A0C4E00B3A6A2 /* RCCManagerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CC84A1961C1A0C4E00B3A6A2 /* RCCManagerModule.m */; };
 		CC84A1A01C1A0C4E00B3A6A2 /* RCCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC84A1981C1A0C4E00B3A6A2 /* RCCNavigationController.m */; };
@@ -55,6 +57,10 @@
 		26AFF3F41D7EEE2400CBA211 /* RCCTitleViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCTitleViewHelper.m; sourceTree = "<group>"; };
 		A1176F741E01E286003A52CA /* RCCPresentAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCPresentAnimationController.h; sourceTree = "<group>"; };
 		A1176F751E01E286003A52CA /* RCCPresentAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCPresentAnimationController.m; sourceTree = "<group>"; };
+		A1176F851E01ECD9003A52CA /* RCCDismissAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCDismissAnimationController.h; sourceTree = "<group>"; };
+		A1176F861E01ECD9003A52CA /* RCCDismissAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCDismissAnimationController.m; sourceTree = "<group>"; };
+		A1176F881E01EEDF003A52CA /* RCCDismissInteractionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCDismissInteractionController.h; sourceTree = "<group>"; };
+		A1176F891E01EEDF003A52CA /* RCCDismissInteractionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCDismissInteractionController.m; sourceTree = "<group>"; };
 		CC84A1931C1A0C4E00B3A6A2 /* RCCManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCManager.h; sourceTree = "<group>"; };
 		CC84A1941C1A0C4E00B3A6A2 /* RCCManager.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = RCCManager.m; sourceTree = "<group>"; tabWidth = 2; };
 		CC84A1951C1A0C4E00B3A6A2 /* RCCManagerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCManagerModule.h; sourceTree = "<group>"; };
@@ -134,6 +140,10 @@
 			children = (
 				A1176F741E01E286003A52CA /* RCCPresentAnimationController.h */,
 				A1176F751E01E286003A52CA /* RCCPresentAnimationController.m */,
+				A1176F851E01ECD9003A52CA /* RCCDismissAnimationController.h */,
+				A1176F861E01ECD9003A52CA /* RCCDismissAnimationController.m */,
+				A1176F881E01EEDF003A52CA /* RCCDismissInteractionController.h */,
+				A1176F891E01EEDF003A52CA /* RCCDismissInteractionController.m */,
 			);
 			name = AnimationControllers;
 			sourceTree = "<group>";
@@ -314,6 +324,7 @@
 				D85082E31CBCF54200FDB961 /* SidebarAirbnbAnimation.m in Sources */,
 				D84813191C8C5EB700051BAF /* RCCLightBox.m in Sources */,
 				CC84A19E1C1A0C4E00B3A6A2 /* RCCManager.m in Sources */,
+				A1176F871E01ECD9003A52CA /* RCCDismissAnimationController.m in Sources */,
 				D85082E21CBCF54200FDB961 /* RCCTheSideBarManagerViewController.m in Sources */,
 				D85082FC1CBCF8A800FDB961 /* MMDrawerBarButtonItem.m in Sources */,
 				D85083001CBCF8A800FDB961 /* UIViewController+MMDrawerController.m in Sources */,
@@ -331,6 +342,7 @@
 				D85082E41CBCF54200FDB961 /* SidebarAnimation.m in Sources */,
 				D8E11C571CBD1F670018B644 /* RCCDrawerController.m in Sources */,
 				260804DB1CE0D9D20094DBA1 /* RCCToolBar.m in Sources */,
+				A1176F8A1E01EEDF003A52CA /* RCCDismissInteractionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

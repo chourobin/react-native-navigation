@@ -5,11 +5,18 @@
 #import "RCTConvert.h"
 #import <objc/runtime.h>
 #import "RCCTitleViewHelper.h"
+
 #import "RCCPresentAnimationController.h"
+#import "RCCDismissAnimationController.h"
+#import "RCCDismissInteractionController.h"
 
 @interface RCCNavigationController () <UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) RCCPresentAnimationController *presentAnimationController;
+
+@property (strong, nonatomic) RCCDismissAnimationController *dismissAnimationController;
+
+@property (strong, nonatomic) RCCDismissInteractionController *dismissInteractionController;
 
 @end
 
@@ -50,12 +57,7 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
                    props:props
                    style:navigatorStyle];
 
-  NSNumber *interactiveDismiss = navigatorStyle[@"interactiveDismiss"];
-  BOOL interactiveDismissBool = interactiveDismiss ? [interactiveDismiss boolValue] : NO;
-  if (interactiveDismissBool)
-  {
-    [self setTransitioningDelegate:self];
-  }
+  [self processTransitioning:navigatorStyle];
 
   return self;
 }
@@ -81,7 +83,6 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
       NSMutableDictionary *mergedStyle = [NSMutableDictionary dictionaryWithDictionary:parent.navigatorStyle];
       
       // there are a few styles that we don't want to remember from our parent (they should be local)
-      [mergedStyle removeObjectForKey:@"interactiveDismiss"];
       [mergedStyle removeObjectForKey:@"navBarHidden"];
       [mergedStyle removeObjectForKey:@"statusBarHidden"];
       [mergedStyle removeObjectForKey:@"navBarHideOnScroll"];
@@ -309,6 +310,28 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
   
 }
 
+- (void)processTransitioning:(NSDictionary *)style
+{
+  NSNumber *customTransition = style[@"customTransition"];
+  BOOL customTransitionBool = customTransition ? [customTransition boolValue] : NO;
+  if (customTransitionBool)
+  {
+    [self setTransitioningDelegate:self];
+  }
+  
+  NSNumber *customTransitionFade = style[@"customTransitionFade"];
+  if (customTransitionFade) {
+    BOOL fadeBool = [customTransitionFade boolValue];
+    [self.presentAnimationController setAnimateFade:fadeBool];
+  }
+  
+  NSNumber *customTransitionScaleDown = style[@"customTransitionScaleDown"];
+  if (customTransitionScaleDown) {
+    BOOL scaleDownBool = [customTransitionScaleDown boolValue];
+    [self.presentAnimationController setAnimateScale:scaleDownBool];
+  }
+}
+
 #pragma mark - <UIViewControllerTransitioningDelegate>
 
 - (RCCPresentAnimationController *)presentAnimationController {
@@ -318,9 +341,35 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
   return _presentAnimationController;
 }
 
+- (RCCDismissAnimationController *)dismissAnimationController
+{
+  if (!_dismissAnimationController) {
+    _dismissAnimationController = [[RCCDismissAnimationController alloc] init];
+  }
+  return _dismissAnimationController;
+}
+
+- (RCCDismissInteractionController *)dismissInteractionController
+{
+  if (!_dismissInteractionController) {
+    _dismissInteractionController = [[RCCDismissInteractionController alloc] init];
+  }
+  return _dismissInteractionController;
+}
+
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
   return [self presentAnimationController];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+  return [self dismissAnimationController];
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
+{
+  return [self.dismissInteractionController interactionInProgress] ? [self dismissInteractionController] : nil;
 }
 
 @end

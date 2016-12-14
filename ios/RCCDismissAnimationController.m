@@ -1,14 +1,14 @@
 //
-//  RCCPresentAnimationController.m
+//  RCCDismissAnimationController.m
 //  ReactNativeNavigation
 //
 //  Created by Robin Chou on 12/14/16.
 //  Copyright © 2016 artal. All rights reserved.
 //
 
-#import "RCCPresentAnimationController.h"
+#import "RCCDismissAnimationController.h"
 
-@implementation RCCPresentAnimationController
+@implementation RCCDismissAnimationController
 
 - (instancetype)init
 {
@@ -34,35 +34,37 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
     
-    CGRect offscreenBottom = CGRectOffset(containerView.bounds, 0, CGRectGetHeight(containerView.bounds));
-    CGRect fullScreen = [transitionContext finalFrameForViewController:toVC];
+    CGRect fullScreen = containerView.bounds;
+    CGRect offscreenBottom = CGRectOffset(fullScreen, 0, CGRectGetHeight(containerView.bounds));
     
-    UIView *fromSnapshotContainer = [[UIView alloc] initWithFrame:fullScreen];
-    fromSnapshotContainer.backgroundColor = [UIColor blackColor];
-    UIView *fromSnapshot = [fromVC.view snapshotViewAfterScreenUpdates:NO];
-    fromSnapshot.frame = fromSnapshotContainer.bounds;
-    [fromSnapshotContainer addSubview:fromSnapshot];
+    UIView *toSnapshotContainer = [[UIView alloc] initWithFrame:fullScreen];
+    toSnapshotContainer.backgroundColor = [UIColor blackColor];
+    
+    UIView *toSnapshot = [toVC.view snapshotViewAfterScreenUpdates:YES];
+    toSnapshot.frame = toSnapshotContainer.bounds;
+    [toSnapshotContainer addSubview:toSnapshot];
     
     CGAffineTransform scaleDown = CGAffineTransformMakeScale(0.9, 0.9);
     scaleDown = CGAffineTransformTranslate(scaleDown, 0, 5);
+    toSnapshot.transform = self.animateScale ? scaleDown : CGAffineTransformIdentity;
+    toSnapshot.alpha = self.animateFade ? 0.6 : 1.0;
     
-    UIView *toSnapshot = [toVC.view snapshotViewAfterScreenUpdates:YES];
-    toSnapshot.frame = offscreenBottom;
+    UIView *fromSnapshot = [fromVC.view snapshotViewAfterScreenUpdates:NO];
+    fromSnapshot.frame = fullScreen;
     
-    [containerView addSubview:toVC.view];
-    [containerView addSubview:fromSnapshotContainer];
-    [containerView addSubview:toSnapshot];
-    toVC.view.hidden = YES;
+    [containerView addSubview:toSnapshotContainer];
+    [containerView addSubview:fromSnapshot];
+    fromVC.view.hidden = YES;
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        fromSnapshot.alpha = [self animateFade] ? 0.6 : 1.0;
-        fromSnapshot.transform = [self animateScale] ? scaleDown : CGAffineTransformIdentity;
-        toSnapshot.frame = fullScreen;
+        toSnapshot.alpha = 1;
+        toSnapshot.transform = CGAffineTransformIdentity;
+        fromSnapshot.frame = offscreenBottom;
     } completion:^(BOOL finished) {
-        toVC.view.hidden = NO;
-        [toSnapshot removeFromSuperview];
-        [fromSnapshotContainer removeFromSuperview];
+        fromVC.view.hidden = NO;
+        [toSnapshotContainer removeFromSuperview];
+        [fromSnapshot removeFromSuperview];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
 }

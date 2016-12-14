@@ -1,5 +1,5 @@
 //
-//  RCCPresentAnimationController.h
+//  RCCDismissAnimationController.h
 //  ReactNativeNavigation
 //
 //  Created by Robin Chou on 12/14/16.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RCCPresentAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
+@interface RCCDismissAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
 
 @property (assign, nonatomic) BOOL animateFade; // default is YES
 

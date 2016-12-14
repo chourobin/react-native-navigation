@@ -317,18 +317,21 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
   if (customTransitionBool)
   {
     [self setTransitioningDelegate:self];
+    [self.dismissInteractionController wireToViewController:self];
   }
   
   NSNumber *customTransitionFade = style[@"customTransitionFade"];
   if (customTransitionFade) {
     BOOL fadeBool = [customTransitionFade boolValue];
     [self.presentAnimationController setAnimateFade:fadeBool];
+    [self.dismissAnimationController setAnimateFade:fadeBool];
   }
   
   NSNumber *customTransitionScaleDown = style[@"customTransitionScaleDown"];
   if (customTransitionScaleDown) {
     BOOL scaleDownBool = [customTransitionScaleDown boolValue];
     [self.presentAnimationController setAnimateScale:scaleDownBool];
+    [self.dismissAnimationController setAnimateFade:scaleDownBool];
   }
 }
 

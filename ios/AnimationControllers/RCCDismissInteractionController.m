@@ -7,6 +7,7 @@
 //
 
 #import "RCCDismissInteractionController.h"
+#import "RCCManager.h"
 
 @interface RCCDismissInteractionController () <UIGestureRecognizerDelegate>
 
@@ -68,6 +69,7 @@
             if (!self.shouldCompleteTransition) {
                 [self cancelInteractiveTransition];
             } else {
+                [[RCCManager sharedIntance] unregisterController:self.viewController];
                 [self finishInteractiveTransition];
             }
         default:

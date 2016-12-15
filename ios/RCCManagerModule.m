@@ -300,10 +300,16 @@ showController:(NSDictionary*)layout animationType:(NSString*)animationType glob
                                                 error:[RCCManagerModule rccErrorWithCode:RCCManagerModuleCantCreateControllerErrorCode description:@"could not create controller"]];
         return;
     }
+    
+    UIViewController *lastModalPresenterViewController = [RCCManagerModule lastModalPresenterViewController];
+    if ([animationType isEqualToString:@"custom"])
+    {
+        [(RCCNavigationController *)lastModalPresenterViewController setCustomTransitioningEnabled:YES];
+    }
 
-    [[RCCManagerModule lastModalPresenterViewController] presentViewController:controller
-                                                           animated:![animationType isEqualToString:@"none"]
-                                                         completion:^(){ resolve(nil); }];
+    [lastModalPresenterViewController presentViewController:controller
+                                                   animated:![animationType isEqualToString:@"none"]
+                                                 completion:^(){ resolve(nil); }];
 }
 
 -(BOOL)viewControllerIsModal:(UIViewController*)viewController

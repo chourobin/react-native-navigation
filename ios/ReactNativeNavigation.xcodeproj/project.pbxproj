@@ -138,28 +138,29 @@
 		A1176F771E01E28E003A52CA /* AnimationControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A1176F741E01E286003A52CA /* RCCPresentAnimationController.h */,
-				A1176F751E01E286003A52CA /* RCCPresentAnimationController.m */,
 				A1176F851E01ECD9003A52CA /* RCCDismissAnimationController.h */,
 				A1176F861E01ECD9003A52CA /* RCCDismissAnimationController.m */,
 				A1176F881E01EEDF003A52CA /* RCCDismissInteractionController.h */,
 				A1176F891E01EEDF003A52CA /* RCCDismissInteractionController.m */,
+				A1176F741E01E286003A52CA /* RCCPresentAnimationController.h */,
+				A1176F751E01E286003A52CA /* RCCPresentAnimationController.m */,
 			);
 			name = AnimationControllers;
+			path = AnimationControllers;
 			sourceTree = "<group>";
 		};
 		D85082BB1CBCF42400FDB961 /* RCCDrawerController */ = {
 			isa = PBXGroup;
 			children = (
-				D85082CF1CBCF54200FDB961 /* TheSidebarController */,
 				D85082BC1CBCF42400FDB961 /* MMDrawerController */,
+				D85082CF1CBCF54200FDB961 /* TheSidebarController */,
+				D85082C81CBCF42400FDB961 /* RCCDrawerController.h */,
+				D8E11C561CBD1F670018B644 /* RCCDrawerController.m */,
 				D85082CA1CBCF54200FDB961 /* RCCDrawerHelper.h */,
 				D85082CB1CBCF54200FDB961 /* RCCDrawerHelper.m */,
 				D85082CC1CBCF54200FDB961 /* RCCDrawerProtocol.h */,
 				D85082CD1CBCF54200FDB961 /* RCCTheSideBarManagerViewController.h */,
 				D85082CE1CBCF54200FDB961 /* RCCTheSideBarManagerViewController.m */,
-				D85082C81CBCF42400FDB961 /* RCCDrawerController.h */,
-				D8E11C561CBD1F670018B644 /* RCCDrawerController.m */,
 			);
 			path = RCCDrawerController;
 			sourceTree = "<group>";
@@ -216,26 +217,26 @@
 		D8AFADB41BEE6F3F00A4592D = {
 			isa = PBXGroup;
 			children = (
+				A1176F771E01E28E003A52CA /* AnimationControllers */,
 				D8D779951D04B7180050CFEA /* Helpers */,
-				260804D51CE0D7090094DBA1 /* RCCToolBar */,
+				D8AFADBE1BEE6F3F00A4592D /* Products */,
 				D85082BB1CBCF42400FDB961 /* RCCDrawerController */,
+				260804D51CE0D7090094DBA1 /* RCCToolBar */,
+				D800E8171CFED1DB004A187F /* RCCExternalViewControllerProtocol.h */,
+				D84813171C8C5EB700051BAF /* RCCLightBox.h */,
+				D84813181C8C5EB700051BAF /* RCCLightBox.m */,
 				CC84A1931C1A0C4E00B3A6A2 /* RCCManager.h */,
 				CC84A1941C1A0C4E00B3A6A2 /* RCCManager.m */,
 				CC84A1951C1A0C4E00B3A6A2 /* RCCManagerModule.h */,
 				CC84A1961C1A0C4E00B3A6A2 /* RCCManagerModule.m */,
 				CC84A1971C1A0C4E00B3A6A2 /* RCCNavigationController.h */,
 				CC84A1981C1A0C4E00B3A6A2 /* RCCNavigationController.m */,
+				D83514F41D29719A00D53758 /* RCCNotification.h */,
+				D83514F51D29719A00D53758 /* RCCNotification.m */,
 				CC84A1991C1A0C4E00B3A6A2 /* RCCTabBarController.h */,
 				CC84A19A1C1A0C4E00B3A6A2 /* RCCTabBarController.m */,
 				CC84A19B1C1A0C4E00B3A6A2 /* RCCViewController.h */,
 				CC84A19C1C1A0C4E00B3A6A2 /* RCCViewController.m */,
-				D84813171C8C5EB700051BAF /* RCCLightBox.h */,
-				D84813181C8C5EB700051BAF /* RCCLightBox.m */,
-				D800E8171CFED1DB004A187F /* RCCExternalViewControllerProtocol.h */,
-				D83514F41D29719A00D53758 /* RCCNotification.h */,
-				D83514F51D29719A00D53758 /* RCCNotification.m */,
-				A1176F771E01E28E003A52CA /* AnimationControllers */,
-				D8AFADBE1BEE6F3F00A4592D /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,10 +251,10 @@
 		D8D779951D04B7180050CFEA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D8D779961D04B7180050CFEA /* RCTHelpers.h */,
-				D8D779971D04B7180050CFEA /* RCTHelpers.m */,
 				26AFF3F31D7EEE2400CBA211 /* RCCTitleViewHelper.h */,
 				26AFF3F41D7EEE2400CBA211 /* RCCTitleViewHelper.m */,
+				D8D779961D04B7180050CFEA /* RCTHelpers.h */,
+				D8D779971D04B7180050CFEA /* RCTHelpers.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

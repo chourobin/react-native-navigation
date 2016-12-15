@@ -7,8 +7,8 @@
 ```js
 Modal.showModal({
   screen: "...",
+  animationType: 'custom', // 'custom', 'slide-up' (default), or 'none'
   navigatorStyle: {
-    customTransition: true, // enable custom transitions - default false
     customTransitionFade: true, // fade animation - default true
     customTransitionScaleDown: false, // scales down animation - default false
   }
